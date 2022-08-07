@@ -1,0 +1,26 @@
+{{- if .Values.zipkin.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zipkin-mysql
+  labels:
+    name: zipkin-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: zipkin-mysql
+  template:
+    metadata:
+      labels:
+        name: zipkin-mysql
+    spec:
+      containers:
+      - name: zipkin-mysql
+        image: {{if .Values.global.registry}}{{ .Values.global.registry }}/{{end}}{{ .Values.zipkinmysql.image.repo }}:{{ .Values.zipkinmysql.image.tag }}
+        ports:
+        - name: mysql
+          containerPort: 3306
+        resources:
+{{ toYaml .Values.zipkinmysql.resources | indent 10 }}
+{{- end -}}

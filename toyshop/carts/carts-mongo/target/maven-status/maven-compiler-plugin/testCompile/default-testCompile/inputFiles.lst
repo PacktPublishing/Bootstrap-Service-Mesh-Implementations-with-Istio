@@ -1,0 +1,4 @@
+/Users/arai/go/src/github.com/packtpublishing/bootstrap-service-mesh-implementations-with-istio/toyshop/carts/carts-mongo/src/test/java/io/helidon/examples/sockshop/carts/mongo/MongoCartRepositoryIT.java
+/Users/arai/go/src/github.com/packtpublishing/bootstrap-service-mesh-implementations-with-istio/toyshop/carts/carts-mongo/src/test/java/io/helidon/examples/sockshop/carts/mongo/MongoCartResourceIT.java
+/Users/arai/go/src/github.com/packtpublishing/bootstrap-service-mesh-implementations-with-istio/toyshop/carts/carts-mongo/src/test/java/io/helidon/examples/sockshop/carts/mongo/MongoCartResourceAsyncIT.java
+/Users/arai/go/src/github.com/packtpublishing/bootstrap-service-mesh-implementations-with-istio/toyshop/carts/carts-mongo/src/test/java/io/helidon/examples/sockshop/carts/mongo/MongoCartRepositoryAsyncIT.java

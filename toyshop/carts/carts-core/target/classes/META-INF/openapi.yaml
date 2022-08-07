@@ -1,0 +1,37 @@
+#
+# Copyright (c) 2020 Oracle and/or its affiliates.
+#
+# Licensed under the Universal Permissive License v 1.0 as shown at
+# http://oss.oracle.com/licenses/upl.
+#
+openapi: 3.0.1
+info:
+  title: "Helidon Sock Shop: Carts API"
+  description: "Allows users to add products they want to buy to a
+    shopping cart, remove them from the cart, and merge the contents
+    of one shopping cart into another"
+  version: 1.4.1
+  contact:
+    name: "Helidon Sock Shop"
+    url: https://github.com/helidon-sockshop/sockshop
+  license:
+    name: "The Universal Permissive License (UPL), Version 1.0"
+    url: https://github.com/helidon-sockshop/sockshop/blob/master/LICENSE.txt
+servers:
+  - url: http://api.core.sockshop.helidon.io/
+    description: "Sock Shop implementation with In-Memory backend"
+  - url: http://api.coherence.sockshop.helidon.io/
+    description: "Sock Shop implementation with Coherence backend"
+  - url: http://api.mongo.sockshop.helidon.io/
+    description: "Sock Shop implementation with MongoDB backend"
+  - url: http://api.redis.sockshop.helidon.io/
+    description: "Sock Shop implementation with Redis backend"
+  - url: http://api.mysql.sockshop.helidon.io/
+    description: "Sock Shop implementation with MySQL backend"
+externalDocs:
+  description: "Additional Documentation"
+  url: https://github.com/helidon-sockshop/carts
+
+  
+    
+    

@@ -1,0 +1,157 @@
+# github.com/Shopify/sarama v1.11.0
+## explicit
+github.com/Shopify/sarama
+# github.com/Shopify/toxiproxy v2.1.4+incompatible
+## explicit
+# github.com/Sirupsen/logrus v0.11.6-0.20170317143214-10f801ebc38b
+## explicit
+github.com/Sirupsen/logrus
+# github.com/afex/hystrix-go v0.0.0-20160615205002-39520ddd07a9
+## explicit
+github.com/afex/hystrix-go/hystrix
+github.com/afex/hystrix-go/hystrix/metric_collector
+github.com/afex/hystrix-go/hystrix/rolling
+# github.com/apache/thrift v0.0.0-20170102094337-d8bb0e3b9ff7
+## explicit
+github.com/apache/thrift/lib/go/thrift
+# github.com/beorn7/perks v0.0.0-20160804104726-4c0e84591b9a
+## explicit
+github.com/beorn7/perks/quantile
+# github.com/davecgh/go-spew v1.1.0
+## explicit
+github.com/davecgh/go-spew/spew
+# github.com/eapache/go-resiliency v1.0.1-0.20160104191539-b86b1ec0dd42
+## explicit
+github.com/eapache/go-resiliency/breaker
+# github.com/eapache/go-xerial-snappy v0.0.0-20160609142408-bb955e01b934
+## explicit
+github.com/eapache/go-xerial-snappy
+# github.com/eapache/queue v1.1.0
+## explicit
+github.com/eapache/queue
+# github.com/go-kit/kit v0.3.1-0.20170117214239-bbb2306ec131
+## explicit
+github.com/go-kit/kit/circuitbreaker
+github.com/go-kit/kit/endpoint
+github.com/go-kit/kit/log
+github.com/go-kit/kit/tracing/opentracing
+github.com/go-kit/kit/transport/http
+# github.com/go-logfmt/logfmt v0.3.0
+## explicit
+github.com/go-logfmt/logfmt
+# github.com/go-stack/stack v1.5.2
+## explicit
+github.com/go-stack/stack
+# github.com/gogo/protobuf v0.0.0-20161220170212-84af2615df1b
+## explicit
+github.com/gogo/protobuf/proto
+# github.com/golang/protobuf v0.0.0-20170307001533-c9c7427a2a70
+## explicit
+github.com/golang/protobuf/proto
+# github.com/golang/snappy v0.0.0-20160529050041-d9eb7a3d35ec
+## explicit
+github.com/golang/snappy
+# github.com/gorilla/context v1.1.1
+## explicit
+github.com/gorilla/context
+# github.com/gorilla/mux v0.0.0-20160920230813-757bef944d0f
+## explicit
+github.com/gorilla/mux
+# github.com/klauspost/crc32 v0.0.0-20161016154125-cb6bfca970f6
+## explicit
+github.com/klauspost/crc32
+# github.com/kr/logfmt v0.0.0-20140226030751-b84e30acd515
+## explicit
+github.com/kr/logfmt
+# github.com/matttproud/golang_protobuf_extensions v1.0.1
+## explicit
+github.com/matttproud/golang_protobuf_extensions/pbutil
+# github.com/opentracing/opentracing-go v1.0.1-0.20161231212324-5e5abf838007
+## explicit
+github.com/opentracing/opentracing-go
+github.com/opentracing/opentracing-go/ext
+github.com/opentracing/opentracing-go/log
+# github.com/openzipkin/zipkin-go-opentracing v0.2.2
+## explicit
+github.com/openzipkin/zipkin-go-opentracing
+github.com/openzipkin/zipkin-go-opentracing/_thrift/gen-go/scribe
+github.com/openzipkin/zipkin-go-opentracing/_thrift/gen-go/zipkincore
+github.com/openzipkin/zipkin-go-opentracing/flag
+github.com/openzipkin/zipkin-go-opentracing/types
+github.com/openzipkin/zipkin-go-opentracing/wire
+# github.com/pierrec/lz4 v0.0.0-20161206202305-5c9560bfa9ac
+## explicit
+github.com/pierrec/lz4
+# github.com/pierrec/xxHash v0.0.0-20160112165351-5a004441f897
+## explicit
+github.com/pierrec/xxHash/xxHash32
+# github.com/pmezard/go-difflib v1.0.0
+## explicit
+# github.com/prometheus/client_golang v0.8.1-0.20161124155732-575f371f7862
+## explicit
+github.com/prometheus/client_golang/prometheus
+github.com/prometheus/client_golang/prometheus/promhttp
+# github.com/prometheus/client_model v0.0.0-20150212101744-fa8ad6fec335
+## explicit
+github.com/prometheus/client_model/go
+# github.com/prometheus/common v0.0.0-20161220174553-6d76b79f2398
+## explicit
+github.com/prometheus/common/expfmt
+github.com/prometheus/common/internal/bitbucket.org/ww/goautoneg
+github.com/prometheus/common/model
+# github.com/prometheus/procfs v0.0.0-20161206222141-fcdb11ccb438
+## explicit
+github.com/prometheus/procfs
+# github.com/rcrowley/go-metrics v0.0.0-20161128210544-1f30fe9094a5
+## explicit
+github.com/rcrowley/go-metrics
+# github.com/smartystreets/goconvey v1.7.2
+## explicit; go 1.16
+# github.com/sony/gobreaker v0.0.0-20160504140302-809bcd5a528f
+## explicit
+github.com/sony/gobreaker
+# github.com/streadway/handy v0.0.0-20160402200321-f450267a206e
+## explicit
+github.com/streadway/handy/breaker
+# github.com/stretchr/testify v1.1.5-0.20161217200445-2402e8e7a02f
+## explicit
+# github.com/weaveworks/common v0.0.0-20170321114712-f94043b3da14
+## explicit
+github.com/weaveworks/common/errors
+github.com/weaveworks/common/middleware
+github.com/weaveworks/common/user
+# golang.org/x/net v0.0.0-20190311183353-d8887717615a
+## explicit
+golang.org/x/net/context
+golang.org/x/net/context/ctxhttp
+golang.org/x/net/http/httpguts
+golang.org/x/net/http2
+golang.org/x/net/http2/hpack
+golang.org/x/net/idna
+golang.org/x/net/internal/timeseries
+golang.org/x/net/trace
+# golang.org/x/sync v0.0.0-20220722155255-886fb9371eb4
+## explicit
+# golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a
+## explicit
+golang.org/x/sys/unix
+# golang.org/x/text v0.3.0
+## explicit
+golang.org/x/text/secure/bidirule
+golang.org/x/text/transform
+golang.org/x/text/unicode/bidi
+golang.org/x/text/unicode/norm
+# google.golang.org/grpc v1.2.0
+## explicit
+google.golang.org/grpc
+google.golang.org/grpc/codes
+google.golang.org/grpc/credentials
+google.golang.org/grpc/grpclog
+google.golang.org/grpc/internal
+google.golang.org/grpc/keepalive
+google.golang.org/grpc/metadata
+google.golang.org/grpc/naming
+google.golang.org/grpc/peer
+google.golang.org/grpc/stats
+google.golang.org/grpc/tap
+google.golang.org/grpc/transport

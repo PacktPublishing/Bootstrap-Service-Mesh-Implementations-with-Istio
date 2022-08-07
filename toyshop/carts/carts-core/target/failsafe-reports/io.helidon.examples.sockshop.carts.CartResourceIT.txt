@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: io.helidon.examples.sockshop.carts.CartResourceIT
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.311 s - in io.helidon.examples.sockshop.carts.CartResourceIT

@@ -1,0 +1,71 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders
+  labels:
+    name: orders
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: orders
+  template:
+    metadata:
+      labels:
+        name: orders
+      {{- if .Values.istio.enabled }}
+      annotations:
+        sidecar.istio.io/rewriteAppHTTPProbers: "true"
+      {{- end }}
+    spec:
+      containers:
+      - name: orders
+        image: {{if .Values.global.registry}}{{ .Values.global.registry }}/{{end}}{{ .Values.orders.image.repo }}:{{ .Values.orders.image.tag }}
+        command:
+        - /usr/local/bin/java.sh
+        - -jar
+        - ./app.jar
+        - --port={{ .Values.orders.containerPort }}
+        env:
+         {{- if .Values.zipkin.enabled }}
+         - name: ZIPKIN
+           value: {{ .Values.zipkin.url }}
+         {{- end }}
+         - name: JAVA_OPTS
+           value: {{ .Values.java.options }}
+        resources:
+{{ toYaml .Values.orders.resources | indent 10 }}
+        ports:
+        - containerPort: {{ .Values.orders.containerPort }}
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 10001
+{{- if lt (int .Values.orders.containerPort) 1024 }}
+          capabilities:
+            drop:
+              - all
+            add:
+              - NET_BIND_SERVICE
+{{- end }}
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp-volume
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: {{ .Values.orders.containerPort }}
+          initialDelaySeconds: 300
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: {{ .Values.orders.containerPort }}
+          initialDelaySeconds: 180
+          periodSeconds: 3
+      volumes:
+        - name: tmp-volume
+          emptyDir:
+            medium: Memory
+
