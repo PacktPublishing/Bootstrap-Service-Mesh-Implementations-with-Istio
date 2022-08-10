@@ -5,7 +5,7 @@ metadata:
   name: user
   labels:
     name: user
-  namespace: sock-shop
+  namespace: toy-shop
 spec:
   replicas: 1
   selector:

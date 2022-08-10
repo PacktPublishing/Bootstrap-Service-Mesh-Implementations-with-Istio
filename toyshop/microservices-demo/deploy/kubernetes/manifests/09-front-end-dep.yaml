@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: front-end
-  namespace: sock-shop
+  namespace: toy-shop
 spec:
   replicas: 1
   selector:

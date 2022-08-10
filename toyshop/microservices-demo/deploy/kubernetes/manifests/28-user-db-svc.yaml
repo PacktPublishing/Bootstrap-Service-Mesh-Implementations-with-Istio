@@ -5,7 +5,7 @@ metadata:
   name: user-db
   labels:
     name: user-db
-  namespace: sock-shop
+  namespace: toy-shop
 spec:
   ports:
     # the port that this service should serve on

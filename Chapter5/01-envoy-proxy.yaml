@@ -1,0 +1,48 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: envoy-dummy-svc
+ 
+  labels:
+    name: envoy-dummy-svc
+  namespace: chapter5
+spec:
+  ports:
+    # the port that this service should serve on
+  - port: 80
+    targetPort: 10000
+  selector:
+    name: envoyproxy
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: envoy
+  labels:
+    name: envoy
+  namespace: chapter5
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: envoyproxy
+  template:
+    metadata:
+      labels:
+        name: envoyproxy
+    spec:
+      containers:
+      - name: envoyproxy
+        image: envoyproxy/envoy:v1.22.2 
+        args: ["-c","/tmp/envoy-config-1.yaml"]
+        ports:
+        - containerPort: 10000
+        volumeMounts:
+        - name: envoy-dummy-cfg
+          mountPath: /tmp
+      volumes:
+      - name: envoy-dummy-cfg
+        configMap:
+          name: envoy-dummy
+

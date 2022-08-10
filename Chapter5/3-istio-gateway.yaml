@@ -1,0 +1,56 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: chapter5-gateway
+  namespace: chapter5
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 8080
+      name: http
+      protocol: HTTP
+    hosts:
+    - "toyshop.com"
+    - "mockshop.com"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: toyshop
+  namespace: chapter5
+spec:
+  hosts:
+  - "toyshop.com"
+  gateways:
+  - chapter5-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 80
+        host: front-end.toy-shop.svc.cluster.local
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: mockshop
+  namespace: chapter5
+spec:
+  hosts:
+  - "mockshop.com"
+  gateways:
+  - chapter5-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 80
+        host: envoy-dummy-svc
