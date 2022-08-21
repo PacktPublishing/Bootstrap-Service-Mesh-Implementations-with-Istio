@@ -18,24 +18,24 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: envoydummy
+  name: envoydummy-2
   namespace: chapter5
 spec:
   replicas: 1
   selector:
     matchLabels:
       name: envoydummy
-      version: v1
+      version: v2
   template:
     metadata:
       labels:
         name: envoydummy
-        version: v1
+        version: v2
     spec:
       containers:
       - name: envoyproxy
         image: envoyproxy/envoy:v1.22.2 
-        args: ["-c","/tmp/envoy-config-1.yaml"]
+        args: ["-c","/tmp/envoy-config-2.yaml"]
         ports:
         - containerPort: 10000
         volumeMounts:
@@ -44,6 +44,6 @@ spec:
       volumes:
       - name: envoy-dummy-cfg
         configMap:
-          name: envoy-dummy
+          name: envoy-dummy-2
 ---
 

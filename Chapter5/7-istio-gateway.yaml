@@ -1,0 +1,46 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: toyshop
+  namespace: chapter5
+spec:
+  hosts:
+  - "toyshop.com"
+  gateways:
+  - chapter5-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 80
+        host: front-end.toy-shop.svc.cluster.local
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: chapter5-gateway
+  namespace: chapter5
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: toyshop-credential 
+    hosts:
+    - "toyshop.com"
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "toyshop.com"
+    tls:
+      httpsRedirect: true

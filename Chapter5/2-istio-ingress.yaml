@@ -7,13 +7,14 @@ metadata:
   namespace: chapter5
 spec:
   rules:
-  - host: "envoyshop.com"
+  - host: "mockshop.com"
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: envoy-dummy-svc
+            name: envoydummy
             port: 
               number: 80
+

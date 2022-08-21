@@ -1,0 +1,58 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: mockshop
+  namespace: chapter5
+spec:
+  hosts:
+  - "mockshop.com"
+  gateways:
+  - chapter5-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /ping
+    route:
+    - destination:
+        port:
+          number: 80
+        host: envoydummy
+  - match:
+    - uri:
+        prefix: /get
+    route:
+    - destination:
+        port:
+          number: 80
+        host: httpbin.org
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: httpbin-svc
+  namespace: chapter5
+spec:
+  hosts:
+  - httpbin.org
+  location: MESH_EXTERNAL
+  ports:
+  - number: 80
+    name: httpbin
+    protocol: http
+  resolution: DNS
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: chapter5-gateway
+  namespace: chapter5
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "mockshop.com"

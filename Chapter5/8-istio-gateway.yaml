@@ -1,21 +1,4 @@
 apiVersion: networking.istio.io/v1alpha3
-kind: Gateway
-metadata:
-  name: chapter5-gateway
-  namespace: chapter5
-spec:
-  selector:
-    istio: ingressgateway
-  servers:
-  - port:
-      number: 80
-      name: http
-      protocol: HTTP
-    hosts:
-    - "toyshop.com"
-    - "mockshop.com"
----
-apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: toyshop
@@ -54,3 +37,31 @@ spec:
         port:
           number: 80
         host: envoydummy
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: chapter5-gateway
+  namespace: chapter5
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 443
+      name: https-toyshop
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: toyshop-credential 
+    hosts:
+    - "toyshop.com"
+  - port:
+      number: 443
+      name: https-mockshop
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: mockshop-credential 
+    hosts:
+    - "mockshop.com"

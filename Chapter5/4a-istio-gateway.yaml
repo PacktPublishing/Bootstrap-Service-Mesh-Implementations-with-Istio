@@ -1,0 +1,60 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: mockshop
+  namespace: chapter5
+spec:
+  hosts:
+  - "mockshop.com"
+  gateways:
+  - chapter5-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 80
+        subset: v1
+        host: envoydummy
+      weight: 10
+    - destination:
+        port:
+          number: 80
+        subset: v2
+        host: envoydummy
+      weight: 90
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: chapter5-gateway
+  namespace: chapter5
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "mockshop.com"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+
+metadata:
+  name: envoy-destination
+  namespace: chapter5
+spec:
+  host: envoydummy
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2

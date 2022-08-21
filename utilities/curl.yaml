@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: curl
+  name: curl
+  namespace: chapter5
+spec:
+  containers:
+  - args:
+    - /bin/sh
+    - -c
+    - sleep infinity
+    image: curlimages/curl
+    name: curl
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
