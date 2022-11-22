@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../Downloads/istio-service-mesh-with-aws-eks-kubernetes-handson-2020-material-eng"
+		}
+	],
+	"settings": {}
+}

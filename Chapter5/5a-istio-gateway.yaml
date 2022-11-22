@@ -48,7 +48,7 @@ metadata:
   namespace: chapter5
 spec:
   selector:
-    istio: ingressgateway # use Istio default gateway implementation
+    istio: ingressgateway 
   servers:
   - port:
       number: 80

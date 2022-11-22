@@ -1,0 +1,63 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: chapter6-gateway
+  namespace: chapter6
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "toyshop.com"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: toyshop
+  namespace: chapter6
+spec:
+  hosts:
+  - "toyshop.com"
+  gateways:
+  - chapter6-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 80
+        host: front-end.toy-shop.svc.cluster.local
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: catalogue
+  namespace: chapter6
+spec:
+  hosts:
+  - "catalogue.toy-shop.svc.cluster.local"
+  gateways:
+  - mesh
+  http:
+  - match:
+    - uri: 
+        prefix: "/catalogue/3395a43e-2d88-40de-b95f-e00e1502085b"
+      ignoreUriCase: true
+    fault: 
+      abort: 
+        httpStatus: 500
+        percentage:
+          value: 100.0 
+    route:
+    - destination:
+        host: catalogue.toy-shop.svc.cluster.local
+        port:
+          number: 80
+
+---

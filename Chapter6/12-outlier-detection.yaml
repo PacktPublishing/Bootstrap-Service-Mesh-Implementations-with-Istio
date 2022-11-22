@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: envoydummy
+  namespace: utilities
+spec:
+  host: envoydummy.utilities.svc.cluster.local
+  trafficPolicy: 
+      connectionPool:
+        http:
+          http2MaxRequests: 2
+          maxRequestsPerConnection: 1
+          http1MaxPendingRequests: 0
+      outlierDetection:
+        baseEjectionTime: 5m
+        consecutive5xxErrors: 1
+        interval: 1s
+        maxEjectionPercent: 100
+---

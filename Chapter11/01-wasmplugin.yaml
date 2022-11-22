@@ -1,0 +1,13 @@
+apiVersion: extensions.istio.io/v1alpha1
+kind: WasmPlugin
+metadata:
+  name: addheaders
+  namespace: chapter11
+spec:
+  selector:
+    matchLabels:
+      app: httpbin
+  url: https://anand-temp.s3.amazonaws.com/main.wasm
+  imagePullPolicy: Always
+  phase: AUTHZ
+

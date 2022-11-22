@@ -1,0 +1,12 @@
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  name: "auth0"
+  namespace: chapter7
+spec:
+  selector:
+    matchLabels:
+      name: envoydummy
+  jwtRules:
+  - issuer: "https://dev-0ej7x7k2.us.auth0.com/"
+    jwksUri: "https://dev-0ej7x7k2.us.auth0.com/.well-known/jwks.json"

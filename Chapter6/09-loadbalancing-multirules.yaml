@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: envoydummy
+  namespace: utilities
+spec:
+  host: envoydummy.utilities.svc.cluster.local 
+  trafficPolicy: 
+       loadBalancer:
+         simple: ROUND_ROBIN
+  subsets:
+  - name: v1
+    labels:
+      version: v1 
+    trafficPolicy: 
+      loadBalancer:
+        simple: LEAST_REQUEST
+  - name: v2
+    labels:
+      version: v2
+    trafficPolicy: 
+      loadBalancer:
+        simple: RANDOM
+---

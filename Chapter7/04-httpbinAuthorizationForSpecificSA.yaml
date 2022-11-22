@@ -1,0 +1,17 @@
+apiVersion: "security.istio.io/v1beta1"
+kind: "AuthorizationPolicy"
+metadata:
+  name: "httpbin-authz-policy"
+  namespace: chapter7
+spec:
+  action: ALLOW
+  selector:
+    matchLabels:
+      app: httpbin
+  rules:
+  - from:
+    - source:
+        principals: ["cluster.local/ns/utilities/sa/curl"]
+    to:
+    - operation:
+        methods: ['*']

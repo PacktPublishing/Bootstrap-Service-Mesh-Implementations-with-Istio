@@ -1,0 +1,5 @@
+spec:
+  template: 
+    metadata:
+      annotations:
+        sidecar.istio.io/extraStatTags: request.url_path

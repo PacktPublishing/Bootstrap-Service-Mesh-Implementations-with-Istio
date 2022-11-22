@@ -1,0 +1,14 @@
+apiVersion: "security.istio.io/v1beta1"
+kind: "AuthorizationPolicy"
+metadata:
+  name: "envoydummy-authz-policy"
+  namespace: chapter7
+spec:
+  action: ALLOW
+  selector:
+    matchLabels:
+      name: envoydummy
+  rules:
+  - when:
+    - key: request.auth.claims[permissions]
+      values: ["read:dummyData"]

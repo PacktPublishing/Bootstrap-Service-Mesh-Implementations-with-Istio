@@ -1,0 +1,6 @@
+spec:
+  template: 
+    metadata:
+      annotations:
+        sidecar.istio.io/extraStatTags: request.method
+        sidecar.istio.io/statsInclusionPrefixes: istio_request_total_bymethod

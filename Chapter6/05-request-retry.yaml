@@ -1,0 +1,41 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: chapter6-gateway
+  namespace: chapter6
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "mockshop.com"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: mockshop
+  namespace: chapter6
+spec:
+  hosts:
+  - "mockshop.com"
+  gateways:
+  - chapter6-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 80
+        host: envoydummy.utilities.svc.cluster.local
+    retries:
+      attempts: 2
+      perTryTimeout: 2s
+      retryOn: 5xx,gateway-error,reset,connect-failure,refused-stream,retriable-4xx
+
+---

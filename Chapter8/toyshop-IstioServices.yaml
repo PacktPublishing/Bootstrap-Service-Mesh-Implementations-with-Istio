@@ -1,0 +1,386 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: istio
+  name: chapter5-toyshop-istio-ingress
+  namespace: toy-shop
+spec:
+  rules:
+  - host: "toyshop.com"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: front-end
+            port: 
+              number: 80
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: front-end
+  namespace: toy-shop
+spec:
+  hosts:
+  - "toyshop.com"
+  gateways:
+  - chapter5-toyshop-istio-ingress
+  http:
+  - route:
+    - destination:
+        host: front-end
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: carts
+  namespace: toy-shop
+spec:
+  hosts:
+  - carts
+  http:
+  - route:
+    - destination:
+        host: carts
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: carts
+  namespace: toy-shop
+spec:
+  host: carts
+  subsets:
+  - name: v1
+    labels:
+      name: carts
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: carts-db
+  namespace: toy-shop
+spec:
+  hosts:
+  - carts-db
+  http:
+  - route:
+    - destination:
+        host: carts-db
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: carts-db
+  namespace: toy-shop
+spec:
+  host: carts-db
+  subsets:
+  - name: v1
+    labels:
+      name: carts-db
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: catalogue
+  namespace: toy-shop
+spec:
+  hosts:
+  - catalogue
+  http:
+  - route:
+    - destination:
+        host: catalogue
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: catalogue
+  namespace: toy-shop
+spec:
+  host: catalogue
+  subsets:
+  - name: v1
+    labels:
+      name: catalogue
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: catalogue-db
+  namespace: toy-shop
+spec:
+  hosts:
+  - catalogue-db
+  http:
+  - route:
+    - destination:
+        host: catalogue-db
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: catalogue-db
+  namespace: toy-shop
+spec:
+  host: catalogue-db
+  subsets:
+  - name: v1
+    labels:
+      name: catalogue-db
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: front-end
+  namespace: toy-shop
+spec:
+  host: front-end
+  subsets:
+  - name: v1
+    labels:
+      name: front-end
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: orders
+  namespace: toy-shop
+spec:
+  hosts:
+  - orders
+  http:
+  - route:
+    - destination:
+        host: catalogue-db
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: orders
+  namespace: toy-shop
+spec:
+  host: orders
+  subsets:
+  - name: v1
+    labels:
+      name: orders
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: orders-db
+  namespace: toy-shop
+spec:
+  hosts:
+  - orders-db
+  http:
+  - route:
+    - destination:
+        host: orders-db
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: orders-db
+  namespace: toy-shop
+spec:
+  host: orders-db
+  subsets:
+  - name: v1
+    labels:
+      name: orders-db
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: payment
+  namespace: toy-shop
+spec:
+  hosts:
+  - payment
+  http:
+  - route:
+    - destination:
+        host: payment
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: payment
+  namespace: toy-shop
+spec:
+  host: payment
+  subsets:
+  - name: v1
+    labels:
+      name: payment
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: queue-master
+  namespace: toy-shop
+spec:
+  hosts:
+  - queue-master
+  http:
+  - route:
+    - destination:
+        host: queue-master
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: queue-master
+  namespace: toy-shop  
+spec:
+  host: queue-master
+  subsets:
+  - name: v1
+    labels:
+      name: queue-master
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: rabbitmq
+  namespace: toy-shop
+spec:
+  hosts:
+  - rabbitmq
+  http:
+  - route:
+    - destination:
+        host: rabbitmq
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: rabbitmq
+  namespace: toy-shop
+spec:
+  host: rabbitmq
+  subsets:
+  - name: v1
+    labels:
+      name: rabbitmq
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: shipping
+  namespace: toy-shop
+spec:
+  hosts:
+  - shipping
+  http:
+  - route:
+    - destination:
+        host: shipping
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: shipping
+  namespace: toy-shop
+spec:
+  host: shipping
+  subsets:
+  - name: v1
+    labels:
+      name: shipping
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: user
+  namespace: toy-shop
+spec:
+  hosts:
+  - user
+  http:
+  - route:
+    - destination:
+        host: user
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: user
+  namespace: toy-shop
+spec:
+  host: user
+  subsets:
+  - name: v1
+    labels:
+      name: user
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: user-db
+  namespace: toy-shop
+spec:
+  hosts:
+  - user-db
+  http:
+  - route:
+    - destination:
+        host: user-db
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: user-db
+  namespace: toy-shop
+spec:
+  host: user-db
+  subsets:
+  - name: v1
+    labels:
+      name: user-db
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: session-db
+  namespace: toy-shop
+spec:
+  hosts:
+  - session-db
+  http:
+  - route:
+    - destination:
+        host: user-db
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: session-db
+  namespace: toy-shop
+spec:
+  host: session-db
+  subsets:
+  - name: v1
+    labels:
+      name: session-db
