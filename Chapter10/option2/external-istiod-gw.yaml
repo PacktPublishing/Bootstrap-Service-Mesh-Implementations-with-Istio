@@ -1,0 +1,74 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: external-istiod-gw
+  namespace: external-istiod
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 15012
+        protocol: https
+        name: https-XDS
+      tls:
+        mode: SIMPLE
+        credentialName: httpbin-credential4
+      hosts:
+      - a3f7de7e3770542b59a995c9fd890d86-528898542.us-east-1.elb.amazonaws.com
+    - port:
+        number: 15017
+        protocol: https
+        name: https-WEBHOOK
+      tls:
+        mode: SIMPLE
+        credentialName: httpbin-credential4
+      hosts:
+      - a3f7de7e3770542b59a995c9fd890d86-528898542.us-east-1.elb.amazonaws.com
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+   name: external-istiod-vs
+   namespace: external-istiod
+spec:
+    hosts:
+    - a3f7de7e3770542b59a995c9fd890d86-528898542.us-east-1.elb.amazonaws.com
+    gateways:
+    - external-istiod-gw
+    http:
+    - match:
+      - port: 15012
+      route:
+      - destination:
+          host: istiod.external-istiod.svc.cluster.local
+          port:
+            number: 15012
+    - match:
+      - port: 15017
+      route:
+      - destination:
+          host: istiod.external-istiod.svc.cluster.local
+          port:
+            number: 443
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: external-istiod-dr
+  namespace: external-istiod
+spec:
+  host: istiod.external-istiod.svc.cluster.local
+  trafficPolicy:
+    portLevelSettings:
+    - port:
+        number: 15012
+      tls:
+        mode: SIMPLE
+      connectionPool:
+        http:
+          h2UpgradePolicy: UPGRADE
+    - port:
+        number: 443
+      tls:
+        mode: SIMPLE
