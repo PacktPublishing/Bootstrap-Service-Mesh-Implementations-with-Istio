@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: WorkloadGroup
+metadata:
+  name: "envoydummy"
+  namespace: "chapter12vm"
+spec:
+  metadata:
+    labels:
+      app: "envoydummy"
+  template:
+    serviceAccount: "chapter12-sa"
+    network: "network1"
+  probe:
+    periodSeconds: 5
+    initialDelaySeconds: 1
+    httpGet:
+      port: 10000
+      path: /
