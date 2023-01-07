@@ -1,0 +1,18 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: AllowedIstioServicePortName
+metadata:
+  name: port-name-constraint
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Service"]
+    namespaceSelector:
+      matchExpressions:
+        - key: istio-injection
+          operator: In
+          values: ["enabled"]
+  parameters:
+    message: "All services declaration must have port name will one of following  prefix http-, http2-, grpc-, mongo-,redis-"
+    prefixes: ["http-", "http2-","grpc-","mongo-","redis-"]

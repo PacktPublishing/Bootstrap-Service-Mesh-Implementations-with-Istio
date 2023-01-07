@@ -1,0 +1,48 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: allowedistioserviceportname
+spec:
+  crd:
+    spec:
+      names:
+        kind: AllowedIstioServicePortName
+      validation:
+        openAPIV3Schema:
+          properties:
+            message:
+              type: string
+            prefixes:
+              type: array
+              items: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package istio.allowedistioserviceportname
+        
+        get_message(parameters, _default) = msg {
+          not parameters.message
+          msg := _default
+        }
+
+        get_message(parameters, _default) = msg {
+          msg := parameters.message
+        }
+
+
+        violation[{"msg": msg, "details": {"missing_prefixes": prefixes}}] {
+          service := input.review.object
+          port := service.spec.ports[_]
+          prefixes := input.parameters.prefixes
+
+          not is_prefixed(port, prefixes)
+
+          def_msg := sprintf("service %v.%v port name missing prefix", 
+            [service.metadata.name, service.metadata.namespace])
+          msg := get_message(input.parameters, def_msg)  
+        }
+
+        is_prefixed(port, prefixes) {
+          prefix := prefixes[_]
+          startswith(port.name, prefix)
+        }

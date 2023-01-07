@@ -1,0 +1,20 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: istiorequiredlabels
+metadata:
+  name: mesh-pods-must-have-app-and-version
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+    namespaceSelector:
+      matchExpressions:
+        - key: istio-injection
+          operator: In
+          values: ["enabled"]
+  parameters:
+    message: "All pods must have an `app and version` label"
+    labels:
+      - key: app
+      - key: version

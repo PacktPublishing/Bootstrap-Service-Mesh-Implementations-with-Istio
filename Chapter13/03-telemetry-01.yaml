@@ -1,0 +1,15 @@
+apiVersion: telemetry.istio.io/v1alpha1
+kind: Telemetry
+metadata:
+  name: envoy-dummy-accesslog-overwrite
+  namespace: chapter13
+spec:
+  selector:
+    matchLabels:
+      service.istio.io/canonical-name: envoydummy
+  accessLogging:
+  - providers:
+    - name: envoy
+  - disabled: false
+
+

@@ -1,0 +1,15 @@
+apiVersion: telemetry.istio.io/v1alpha1
+kind: Telemetry
+metadata:
+  name: curl-accesslog-overwrite
+  namespace: chapter13
+spec:
+  selector:
+    matchLabels:
+      service.istio.io/canonical-name: curl
+  accessLogging:
+  - providers:
+    - name: envoy
+  - disabled: false
+
+
