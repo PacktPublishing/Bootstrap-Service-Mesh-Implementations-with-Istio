@@ -1,48 +1,15 @@
----
 apiVersion: v1
 kind: Service
 metadata:
   name: envoydummy
   labels:
-    name: envoydummy
-    service: envoydummy
-  namespace: chapter10
+    app: envoydummy
+  namespace: chapter12vm
 spec:
   ports:
   - port: 80
     targetPort: 10000
+    name: tcp
   selector:
-    name: envoydummy
+    app: envoydummy
 ---
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: envoydummy
-  namespace: chapter10
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      name: envoydummy
-      version: v1
-  template:
-    metadata:
-      labels:
-        name: envoydummy
-        version: v1
-    spec:
-      containers:
-      - name: envoyproxy
-        image: envoyproxy/envoy:v1.22.2 
-        args: ["-c","/tmp/envoy-config-2.yaml"]
-        ports:
-        - containerPort: 10000
-        volumeMounts:
-        - name: envoy-dummy-cfg
-          mountPath: /tmp
-      volumes:
-      - name: envoy-dummy-cfg
-        configMap:
-          name: envoy-dummy
----
-

@@ -6,9 +6,7 @@ variable "aws_access_key" {
 variable "eks_version" {
   description = "AWS EKS version"
   type        = string 
-  default     = "1.23"
-
-
+  default     = "1.24"
 }
 
 variable "aws_secret_key" {

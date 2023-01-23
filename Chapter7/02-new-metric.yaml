@@ -18,7 +18,7 @@ spec:
             subFilter:
               name: envoy.filters.http.router
       proxy:
-        proxyVersion: ^1\.15.*
+        proxyVersion: ^1\.16.*
     patch:
       operation: INSERT_BEFORE
       value:

@@ -18,7 +18,7 @@ spec:
             subFilter:
               name: istio.stats
       proxy:
-        proxyVersion: ^1\.15.*
+        proxyVersion: ^1\.16.*
     patch:
       operation: REPLACE
       value:

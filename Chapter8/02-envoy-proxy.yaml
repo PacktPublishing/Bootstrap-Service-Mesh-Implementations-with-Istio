@@ -6,7 +6,7 @@ metadata:
   labels:
     name: envoydummy
     service: envoydummy
-  namespace: chapter12
+  namespace: chapter10
 spec:
   ports:
   - port: 80
@@ -18,7 +18,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: envoydummy
-  namespace: chapter12
+  namespace: chapter10
 spec:
   replicas: 1
   selector:
@@ -34,7 +34,7 @@ spec:
       containers:
       - name: envoyproxy
         image: envoyproxy/envoy:v1.22.2 
-        args: ["-c","/tmp/envoy-config-1.yaml"]
+        args: ["-c","/tmp/envoy-config-2.yaml"]
         ports:
         - containerPort: 10000
         volumeMounts:

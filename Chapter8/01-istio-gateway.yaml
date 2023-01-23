@@ -1,8 +1,8 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: chapter12-gateway
-  namespace: chapter12
+  name: chapter10-gateway
+  namespace: chapter10
 spec:
   selector:
     istio: ingressgateway
@@ -18,20 +18,18 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: mockshop
-  namespace: chapter12
+  namespace: chapter10
 spec:
   hosts:
   - "mockshop.com"
   gateways:
-  - chapter12-gateway
+  - chapter10-gateway
   http:
   - match:
     - uri:
         prefix: /
     route:
     - destination:
-        host: envoydummy.chapter12.svc.cluster.local
-      weight: 50
-    - destination:
-        host: envoydummy.chapter12vm.svc.cluster.local
-      weight: 50
+        port:
+          number: 80
+        host: envoydummy
