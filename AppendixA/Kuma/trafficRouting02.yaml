@@ -1,0 +1,23 @@
+apiVersion: kuma.io/v1alpha1
+kind: TrafficRoute
+mesh: default
+metadata:
+  name: weightbasedtrafficrouting
+spec:
+  sources:
+    - match:
+        kuma.io/service: curl_appendix-kuma_svc
+  destinations:
+    - match:
+        kuma.io/service: envoydummy_appendix-kuma_svc_80
+  conf:
+    split:
+      - weight: 10
+        destination:
+          kuma.io/service: envoydummy_appendix-kuma_svc_80
+          version: 'v1'
+      - weight: 90
+        destination:
+          kuma.io/service: envoydummy_appendix-kuma_svc_80
+          version: 'v2'
+

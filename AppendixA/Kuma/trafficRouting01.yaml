@@ -1,0 +1,29 @@
+apiVersion: kuma.io/v1alpha1
+kind: TrafficRoute
+mesh: default
+metadata:
+  name: trafficroutingforlatest
+spec:
+  sources:
+    - match:
+        kuma.io/service: curl_appendix-kuma_svc
+  destinations:
+    - match:
+        kuma.io/service: envoydummy_appendix-kuma_svc_80
+  conf:
+    http:
+    - match:
+        path:
+          prefix: "/latest"   
+      destination: 
+        kuma.io/service: envoydummy_appendix-kuma_svc_80
+        version: 'v2'
+    - match:
+        path:
+          prefix: "/old"   
+      destination: 
+        kuma.io/service: envoydummy_appendix-kuma_svc_80
+        version: 'v1'
+    destination: 
+      kuma.io/service: envoydummy_appendix-kuma_svc_80
+

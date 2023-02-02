@@ -1,0 +1,11 @@
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: IngressGateway
+metadata:
+  name: envoy-gateway
+  namespace: appendix-consul
+spec:
+  listeners:
+    - port: 80
+      protocol: http
+      services:
+        - name: envoydummy

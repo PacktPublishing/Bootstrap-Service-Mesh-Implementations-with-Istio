@@ -1,0 +1,22 @@
+apiVersion: kuma.io/v1alpha1
+kind: MeshGatewayRoute
+mesh: default
+metadata:
+  name: envoydummy-edge-gateway-route
+  namespace: appendix-kuma
+spec:
+  selectors:
+    - match:
+        kuma.io/service: envoydummy-edge-gateway
+        port: http/80
+  conf:
+    http:
+      rules:
+        - matches:
+            - path:
+                match: PREFIX
+                value: /
+          backends:
+            - destination:
+                kuma.io/service: envoydummy_appendix-kuma_svc_80
+

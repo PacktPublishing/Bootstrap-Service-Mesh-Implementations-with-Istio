@@ -1,0 +1,13 @@
+apiVersion: policy.linkerd.io/v1beta1
+kind: Server
+metadata:
+  namespace: appendix-linkerd
+  name: envoydummy
+  labels:
+    name: envoydummy
+spec:
+  podSelector:
+    matchLabels:
+      name: envoydummy
+  port: envoydummy-http
+  proxyProtocol: HTTP/1

@@ -1,0 +1,12 @@
+apiVersion: kuma.io/v1alpha1
+kind: TrafficPermission
+mesh: default
+metadata:
+  name: allow-all-traffic-from-curl-to-envoyv1
+spec:
+  sources:
+    - match:
+        kuma.io/service: 'envoydummy-edge-gateway'
+  destinations:
+    - match:
+        kuma.io/service: 'envoydummy_appendix-kuma_svc_80'

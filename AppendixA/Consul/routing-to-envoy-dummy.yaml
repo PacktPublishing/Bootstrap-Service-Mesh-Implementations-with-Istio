@@ -1,0 +1,23 @@
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceRouter
+metadata:
+  name: envoydummy
+spec:
+  routes:
+    - match:
+        http:
+          pathPrefix: '/latest'
+      destination:
+        service: 'envoydummy2'
+---
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceRouter
+metadata:
+  name: envoydummy2
+spec:
+  routes:
+    - match:
+        http:
+          pathPrefix: '/old'
+      destination:
+        service: 'envoydummy'

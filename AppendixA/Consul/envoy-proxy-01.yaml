@@ -1,0 +1,181 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: envoy-dummy
+  namespace: appendix-consul
+data:
+  envoy-config-01.yaml: |-
+    static_resources:
+      listeners:
+      - name: listener_http
+        address:
+          socket_address:
+            address: 0.0.0.0
+            port_value: 10000
+        filter_chains:
+        - filters:
+          - name: envoy.filters.network.http_connection_manager
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+              stat_prefix: chapter3-1_service
+              route_config:
+                name: my_first_route_to_nowhere
+                virtual_hosts:
+                - name: dummy
+                  domains: ["*"]
+                  routes:
+                  - match:
+                      prefix: "/"
+                    direct_response:
+                      status: 200
+                      body:
+                        inline_string: "V1----------Bootstrap Service Mesh Implementation with Istio----------V1"
+              http_filters:
+              - name: envoy.filters.http.router
+                typed_config:
+                  "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+              
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: envoydummy
+  labels:
+    name: envoydummy
+    service: envoydummy
+  namespace: appendix-consul
+spec:
+  ports:
+    # the port that this service should serve on
+  - port: 80
+    targetPort: 10000
+  selector:
+    name: envoydummy
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: envoydummy
+  namespace: appendix-consul
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: envoydummy
+      version: v1
+  template:
+    metadata:
+      labels:
+        name: envoydummy
+        version: v1
+      annotations:
+        consul.hashicorp.com/connect-inject: "true"
+    spec:
+      serviceAccountName: envoydummy
+      containers:
+      - name: envoyproxy
+        image: envoyproxy/envoy:v1.22.2 
+        args: ["-c","/tmp/envoy-config-01.yaml"]
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 10000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 10000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        ports:
+        - containerPort: 10000
+        volumeMounts:
+        - name: envoy-dummy-cfg
+          mountPath: /tmp
+      volumes:
+      - name: envoy-dummy-cfg
+        configMap:
+          name: envoy-dummy
+---
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceDefaults
+metadata:
+  name: envoydummy
+  namespace: appendix-consul
+spec:
+  protocol: "http"
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: envoydummy
+  namespace: appendix-consul
+automountServiceAccountToken: true
+---
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceDefaults
+metadata:
+  name: curl
+  namespace: appendix-consul
+spec:
+  protocol: "http"
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: curl
+  namespace: appendix-consul
+automountServiceAccountToken: true
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    name: curl 
+    app: curl
+  annotations:
+    consul.hashicorp.com/connect-inject: "true"
+  name: curl
+  namespace: appendix-consul
+spec:
+  serviceAccountName: curl
+  containers:
+  - args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy ; sleep infinity 
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 5
+      periodSeconds: 5
+    readinessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 5
+      periodSeconds: 5
+    image: curlimages/curl
+    name: curl
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  # This name will be the service name in Consul.
+  name: curl
+  namespace: appendix-consul
+spec:
+  selector:
+    app: curl
+  ports:
+    - port: 80

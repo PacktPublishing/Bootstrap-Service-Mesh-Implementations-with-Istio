@@ -1,0 +1,10 @@
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceSplitter
+metadata:
+  name: envoydummy
+spec:
+  splits:
+    - weight: 20
+      service: envoydummy
+    - weight: 80
+      service: envoydummy2

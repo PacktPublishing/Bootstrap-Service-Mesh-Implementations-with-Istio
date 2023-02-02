@@ -1,0 +1,10 @@
+apiVersion: kuma.io/v1alpha1
+kind: MeshGatewayInstance
+metadata:
+  name: envoydummy-gateway-instance
+  namespace: appendix-kuma
+spec:
+  replicas: 1
+  serviceType: LoadBalancer
+  tags:
+    kuma.io/service: envoydummy-edge-gateway

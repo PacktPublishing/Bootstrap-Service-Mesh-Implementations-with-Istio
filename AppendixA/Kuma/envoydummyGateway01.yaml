@@ -1,0 +1,17 @@
+apiVersion: kuma.io/v1alpha1
+kind: MeshGateway
+mesh: default
+metadata:
+  name: envoydummy-edge-gateway
+  namespace: appendix-kuma
+spec:
+  selectors:
+  - match:
+      kuma.io/service: envoydummy-edge-gateway
+  conf:
+    listeners:
+      - port: 80
+        protocol: HTTP
+        hostname: mockshop.com
+        tags:
+          port: http/80

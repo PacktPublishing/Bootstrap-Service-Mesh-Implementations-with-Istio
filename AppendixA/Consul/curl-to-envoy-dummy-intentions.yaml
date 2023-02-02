@@ -1,0 +1,11 @@
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceIntentions
+metadata:
+  name: curl-to-envoydummy-api
+  namespace: appendix-consul
+spec:
+  destination:
+    name: envoydummy
+  sources:
+    - name: curl
+      action: allow
