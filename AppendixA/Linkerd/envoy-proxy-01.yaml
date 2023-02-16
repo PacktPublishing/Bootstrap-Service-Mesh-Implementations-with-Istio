@@ -78,18 +78,6 @@ spec:
       - name: envoyproxy
         image: envoyproxy/envoy:v1.22.2 
         args: ["-c","/tmp/envoy-config-01.yaml"]
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 10000
-          initialDelaySeconds: 3
-          periodSeconds: 3
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: 10000
-          initialDelaySeconds: 3
-          periodSeconds: 3
         ports:
         - containerPort: 10000
           name: envoydummy-http

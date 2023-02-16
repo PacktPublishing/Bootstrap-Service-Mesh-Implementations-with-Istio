@@ -1,0 +1,14 @@
+apiVersion: policy.linkerd.io/v1alpha1
+kind: AuthorizationPolicy
+metadata:
+  name: authorise-curl
+  namespace: appendix-linkerd
+spec:
+  targetRef:
+    group: policy.linkerd.io
+    kind: HTTPRoute
+    name: envoydummy-dummy-route
+  requiredAuthenticationRefs:
+    - name: curl
+      kind: ServiceAccount
+---

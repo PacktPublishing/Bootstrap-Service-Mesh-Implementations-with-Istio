@@ -1,8 +1,0 @@
-/Users/arai/go/src/github.com/packtpublishing/bootstrap-service-mesh-implementations-with-istio/toyshop/shipping/src/main/java/works/weave/socks/shipping/entities/HealthCheck.java
-/Users/arai/go/src/github.com/packtpublishing/bootstrap-service-mesh-implementations-with-istio/toyshop/shipping/src/main/java/works/weave/socks/shipping/configuration/WebMvcConfig.java
-/Users/arai/go/src/github.com/packtpublishing/bootstrap-service-mesh-implementations-with-istio/toyshop/shipping/src/main/java/works/weave/socks/shipping/ShippingServiceApplication.java
-/Users/arai/go/src/github.com/packtpublishing/bootstrap-service-mesh-implementations-with-istio/toyshop/shipping/src/main/java/works/weave/socks/shipping/controllers/ShippingController.java
-/Users/arai/go/src/github.com/packtpublishing/bootstrap-service-mesh-implementations-with-istio/toyshop/shipping/src/main/java/works/weave/socks/shipping/entities/Shipment.java
-/Users/arai/go/src/github.com/packtpublishing/bootstrap-service-mesh-implementations-with-istio/toyshop/shipping/src/main/java/works/weave/socks/shipping/middleware/HTTPMonitoringInterceptor.java
-/Users/arai/go/src/github.com/packtpublishing/bootstrap-service-mesh-implementations-with-istio/toyshop/shipping/src/main/java/works/weave/socks/shipping/configuration/RabbitMqConfiguration.java
-/Users/arai/go/src/github.com/packtpublishing/bootstrap-service-mesh-implementations-with-istio/toyshop/shipping/src/main/java/works/weave/socks/shipping/configuration/PrometheusAutoConfiguration.java

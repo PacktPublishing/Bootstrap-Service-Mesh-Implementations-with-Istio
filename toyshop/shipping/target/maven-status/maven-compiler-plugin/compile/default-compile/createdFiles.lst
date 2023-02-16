@@ -1,9 +1,0 @@
-works/weave/socks/shipping/configuration/RabbitMqConfiguration.class
-works/weave/socks/shipping/entities/HealthCheck.class
-works/weave/socks/shipping/configuration/WebMvcConfig.class
-works/weave/socks/shipping/controllers/ShippingController$1.class
-works/weave/socks/shipping/controllers/ShippingController.class
-works/weave/socks/shipping/ShippingServiceApplication.class
-works/weave/socks/shipping/middleware/HTTPMonitoringInterceptor.class
-works/weave/socks/shipping/configuration/PrometheusAutoConfiguration.class
-works/weave/socks/shipping/entities/Shipment.class

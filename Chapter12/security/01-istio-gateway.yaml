@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: online-boutique-ingress-gateway
+  namespace: online-boutique
+spec:
+  selector:
+    istio: ingressgateway 
+  servers:
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: onlineboutique-credential
+    hosts:
+    - "onlineboutique.com"

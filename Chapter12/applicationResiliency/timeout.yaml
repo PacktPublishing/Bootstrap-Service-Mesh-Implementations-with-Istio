@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: online-boutique
+  name: emailvirtualservice
+spec:
+  hosts:
+  - emailservice
+  http:
+  - timeout: 5s
+    route:
+    - destination:
+        host: emailservice
+        subset: v1

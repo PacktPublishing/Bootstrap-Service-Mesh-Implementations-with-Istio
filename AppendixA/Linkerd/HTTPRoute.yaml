@@ -1,0 +1,17 @@
+apiVersion: policy.linkerd.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: envoydummy-dummy-route
+  namespace: appendix-linkerd
+spec:
+  parentRefs:
+    - name: envoydummy
+      kind: Server
+      group: policy.linkerd.io
+      namespace: appendix-linkerd
+  rules:
+    - matches:
+      - path:
+          value: "/dummy/"
+          type: "PathPrefix"
+        method: GET

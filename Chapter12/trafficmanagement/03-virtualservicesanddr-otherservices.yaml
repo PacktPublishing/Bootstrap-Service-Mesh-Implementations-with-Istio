@@ -1,0 +1,270 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: online-boutique
+  name: emailvirtualservice
+spec:
+  hosts:
+  - emailservice
+  http:
+  - route:
+    - destination:
+        host: emailservice
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: online-boutique
+  name: emaildr
+spec:
+  host: emailservice
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      app: emailservice
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: online-boutique
+  name: cartvirtualservice
+spec:
+  hosts:
+  - cartservice
+  http:
+  - route:
+    - destination:
+        host: cartservice
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: online-boutique
+  name: cartsdr
+spec:
+  host: cartservice
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      app: cartservice
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: online-boutique
+  name: cataloguevirtulaservice
+spec:
+  hosts:
+  - productcatalogservice
+  http:
+  - route:
+    - destination:
+        host: productcatalogservice
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: online-boutique
+  name: cataloguedr
+spec:
+  host: productcatalogservice
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      app: productcatalogservice
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: online-boutique
+  name: checkoutvirtualservice
+spec:
+  hosts:
+  - checkoutservice
+  http:
+  - route:
+    - destination:
+        host: checkoutservice
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: online-boutique
+  name: checkoutdr
+spec:
+  host: checkoutservice
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      app: checkoutservice
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: online-boutique
+  name: paymentvirtualservice
+spec:
+  hosts:
+  - paymentservice
+  http:
+  - route:
+    - destination:
+        host: paymentservice
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: online-boutique
+  name: paymentdr
+spec:
+  host: paymentservice
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      app: paymentservice
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: online-boutique
+  name: recommendationvirtualservice
+spec:
+  hosts:
+  - recommendationservice
+  http:
+  - route:
+    - destination:
+        host: recommendationservice
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: online-boutique
+  name: recommendationdr
+spec:
+  host: recommendationservice
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      app: recommendationservice
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: online-boutique
+  name: redis-cart-virtualservice
+spec:
+  hosts:
+  - redis-cart
+  http:
+  - route:
+    - destination:
+        host: redis-cart
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: online-boutique
+  name: redis-cart-dr
+spec:
+  host: redis-cart
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      app: redis-cart
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: online-boutique
+  name: shippingvirtualservice
+spec:
+  hosts:
+  - shippingservice
+  http:
+  - route:
+    - destination:
+        host: shippingservice
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: online-boutique
+  name: shippingdr
+spec:
+  host: shippingservice
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      app: shippingservice
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: online-boutique
+  name: currencyvirtualservice
+spec:
+  hosts:
+  - currencyservice
+  http:
+  - route:
+    - destination:
+        host: currencyservice
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: online-boutique
+  name: currencydr
+spec:
+  host: currencyservice
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      app: currencyservice
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: online-boutique
+  name: advirtualservice
+spec:
+  hosts:
+  - adservice
+  http:
+  - route:
+    - destination:
+        host: adservice
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: online-boutique
+  name: addr
+spec:
+  host: adservice
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      app: adservice
+

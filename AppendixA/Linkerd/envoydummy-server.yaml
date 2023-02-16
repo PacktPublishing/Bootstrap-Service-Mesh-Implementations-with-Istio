@@ -10,4 +10,4 @@ spec:
     matchLabels:
       name: envoydummy
   port: envoydummy-http
-  proxyProtocol: HTTP/1
+  proxyProtocol: HTTP/2

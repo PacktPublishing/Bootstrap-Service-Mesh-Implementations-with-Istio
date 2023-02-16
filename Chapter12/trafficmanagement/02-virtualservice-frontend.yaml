@@ -1,0 +1,28 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: onlineboutique-frontend-vs
+  namespace: online-boutique
+spec:
+  hosts:
+  - "onlineboutique.com"
+  gateways:
+  - online-boutique-ingress-gateway
+  http:
+  - route:
+    - destination:
+        host: frontend
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: frontend
+  namespace: online-boutique
+spec:
+  host: frontend
+  subsets:
+  - name: v1
+    labels:
+      app: frontend
+---

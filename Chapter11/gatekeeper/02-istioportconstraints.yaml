@@ -14,5 +14,5 @@ spec:
           operator: In
           values: ["enabled"]
   parameters:
-    message: "All services declaration must have port name will one of following  prefix http-, http2-, grpc-, mongo-,redis-"
-    prefixes: ["http-", "http2-","grpc-","mongo-","redis-"]
+    message: "All services declaration must have port name with one of following  prefix http-, http2-,https-,grpc-,grpc-web-,mongo-,redis-,mysql-,tcp-,tls-"
+    prefixes: ["http-", "http2-","https-","grpc-","grpc-web-","mongo-","redis-","mysql-","tcp-","tls-"]

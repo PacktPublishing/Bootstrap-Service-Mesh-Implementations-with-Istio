@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: online-boutique
+  name: emaildr
+spec:
+  host: emailservice
+  trafficPolicy: 
+      connectionPool:
+        http:
+          http2MaxRequests: 2
+          maxRequestsPerConnection: 1
+          http1MaxPendingRequests: 0
+      outlierDetection:
+        baseEjectionTime: 5m
+        consecutive5xxErrors: 1
+        interval: 90s
+        maxEjectionPercent: 50
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      app: emailservice
