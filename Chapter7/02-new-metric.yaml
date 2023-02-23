@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
   name: request-total-bymethod
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   workloadSelector:
     labels:

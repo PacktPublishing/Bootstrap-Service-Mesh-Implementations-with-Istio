@@ -3,11 +3,11 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: istio
-  name: chapter5-toyshop-istio-ingress
-  namespace: toy-shop
+  name: chapter4-sockshop-istio-ingress
+  namespace: sock-shop
 spec:
   rules:
-  - host: "toyshop.com"
+  - host: "sockshop.com"
     http:
       paths:
       - path: /

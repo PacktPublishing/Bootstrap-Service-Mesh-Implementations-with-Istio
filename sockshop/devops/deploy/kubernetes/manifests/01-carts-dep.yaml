@@ -5,7 +5,7 @@ metadata:
   name: carts
   labels:
     name: carts
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   replicas: 1
   selector:
@@ -18,14 +18,28 @@ spec:
     spec:
       containers:
       - name: carts
-        image: github.com/packtpublishing/bootstrap-service-mesh-implementations-with-istio/toyshop/carts-svc:0.0.1
+        image: weaveworksdemos/carts:0.4.8
         env:
          - name: JAVA_OPTS
            value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
-       
+        resources:
+          limits:
+            cpu: 300m
+            memory: 500Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
         ports:
-        - containerPort: 7001
-      
+        - containerPort: 80
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 10001
+          capabilities:
+            drop:
+              - all
+            add:
+              - NET_BIND_SERVICE
+          readOnlyRootFilesystem: true
         volumeMounts:
         - mountPath: /tmp
           name: tmp-volume

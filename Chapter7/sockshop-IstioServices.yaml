@@ -4,11 +4,11 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: istio
-  name: chapter5-toyshop-istio-ingress
-  namespace: toy-shop
+  name: chapter5-sockshop-istio-ingress
+  namespace: sock-shop
 spec:
   rules:
-  - host: "toyshop.com"
+  - host: "sockshop.com"
     http:
       paths:
       - path: /
@@ -23,12 +23,12 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: front-end
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   hosts:
-  - "toyshop.com"
+  - "sockshop.com"
   gateways:
-  - chapter5-toyshop-istio-ingress
+  - chapter5-sockshop-istio-ingress
   http:
   - route:
     - destination:
@@ -39,7 +39,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: carts
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   hosts:
   - carts
@@ -53,7 +53,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: carts
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   host: carts
   subsets:
@@ -65,7 +65,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: carts-db
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   hosts:
   - carts-db
@@ -79,7 +79,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: carts-db
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   host: carts-db
   subsets:
@@ -91,7 +91,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: catalogue
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   hosts:
   - catalogue
@@ -105,7 +105,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: catalogue
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   host: catalogue
   subsets:
@@ -117,7 +117,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: catalogue-db
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   hosts:
   - catalogue-db
@@ -131,7 +131,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: catalogue-db
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   host: catalogue-db
   subsets:
@@ -143,7 +143,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: front-end
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   host: front-end
   subsets:
@@ -155,7 +155,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: orders
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   hosts:
   - orders
@@ -169,7 +169,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: orders
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   host: orders
   subsets:
@@ -181,7 +181,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: orders-db
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   hosts:
   - orders-db
@@ -195,7 +195,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: orders-db
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   host: orders-db
   subsets:
@@ -207,7 +207,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: payment
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   hosts:
   - payment
@@ -221,7 +221,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: payment
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   host: payment
   subsets:
@@ -233,7 +233,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: queue-master
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   hosts:
   - queue-master
@@ -247,7 +247,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: queue-master
-  namespace: toy-shop  
+  namespace: sock-shop  
 spec:
   host: queue-master
   subsets:
@@ -259,7 +259,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: rabbitmq
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   hosts:
   - rabbitmq
@@ -273,7 +273,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: rabbitmq
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   host: rabbitmq
   subsets:
@@ -285,7 +285,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: shipping
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   hosts:
   - shipping
@@ -299,7 +299,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: shipping
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   host: shipping
   subsets:
@@ -311,7 +311,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: user
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   hosts:
   - user
@@ -325,7 +325,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: user
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   host: user
   subsets:
@@ -337,7 +337,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: user-db
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   hosts:
   - user-db
@@ -351,7 +351,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: user-db
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   host: user-db
   subsets:
@@ -363,7 +363,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: session-db
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   hosts:
   - session-db
@@ -377,7 +377,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: session-db
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   host: session-db
   subsets:

@@ -7,7 +7,7 @@ metadata:
         prometheus.io/scrape: 'true'
   labels:
     name: queue-master
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   ports:
     # the port that this service should serve on

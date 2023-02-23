@@ -5,7 +5,7 @@ variable "aws_access_key" {
 
 variable "eks_version" {
   description = "AWS EKS version"
-  type        = string 
+  type        = string
   default     = "1.24"
 }
 
@@ -48,8 +48,8 @@ variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map(string)
   default = {
-    "Project"     = "ToyShopDemo"
-   
+    "Project" = "BootstrappingIstio"
+
   }
 
 

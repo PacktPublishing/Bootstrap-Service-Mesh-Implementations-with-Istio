@@ -5,7 +5,7 @@ metadata:
   name: catalogue
   labels:
     name: catalogue
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   replicas: 1
   selector:
@@ -18,7 +18,8 @@ spec:
     spec:
       containers:
       - name: catalogue
-        image: github.com/packtpublishing/bootstrap-service-mesh-implementations-with-istio/toyshop/catalogue:0.0.1
+        image: weaveworksdemos/catalogue:0.3.5
+        command: ["/app"]
         args:
         - -port=80
         resources:

@@ -2,7 +2,7 @@ apiVersion: security.istio.io/v1beta1
 kind: RequestAuthentication
 metadata:
   name: "auth0"
-  namespace: chapter7
+  namespace: chapter6
 spec:
   selector:
     matchLabels:

@@ -5,7 +5,7 @@ metadata:
   name: rabbitmq
   labels:
     name: rabbitmq
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   replicas: 1
   selector:
@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: rabbitmq
-        image: rabbitmq:3-management
+        image: rabbitmq:3.6.8-management
         ports:
         - containerPort: 15672
           name: management
@@ -35,6 +35,7 @@ spec:
               - SETGID
               - SETUID
               - DAC_OVERRIDE
+          readOnlyRootFilesystem: true
       - name: rabbitmq-exporter
         image: kbudde/rabbitmq-exporter
         ports:

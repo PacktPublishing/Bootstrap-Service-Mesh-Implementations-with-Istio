@@ -1,8 +1,8 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: chapter5-gateway
-  namespace: chapter5
+  name: chapter4-gateway
+  namespace: chapter4
 spec:
   selector:
     istio: ingressgateway
@@ -12,19 +12,19 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "toyshop.com"
+    - "sockshop.com"
     - "mockshop.com"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: toyshop
-  namespace: chapter5
+  name: sockshop
+  namespace: chapter4
 spec:
   hosts:
-  - "toyshop.com"
+  - "sockshop.com"
   gateways:
-  - chapter5-gateway
+  - chapter4-gateway
   http:
   - match:
     - uri:
@@ -33,18 +33,18 @@ spec:
     - destination:
         port:
           number: 80
-        host: front-end.toy-shop.svc.cluster.local
+        host: front-end.sock-shop.svc.cluster.local
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: mockshop
-  namespace: chapter5
+  namespace: chapter4
 spec:
   hosts:
   - "mockshop.com"
   gateways:
-  - chapter5-gateway
+  - chapter4-gateway
   http:
   - match:
     - uri:

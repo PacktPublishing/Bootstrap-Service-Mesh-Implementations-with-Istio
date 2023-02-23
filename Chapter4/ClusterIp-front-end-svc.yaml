@@ -5,7 +5,7 @@ metadata:
   name: front-end
   labels:
     name: front-end
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
 
   ports:

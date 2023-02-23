@@ -8,7 +8,7 @@ metadata:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: chapter7sa
+  name: chapter6sa
   namespace: utilities
 ---
 apiVersion: v1
@@ -30,5 +30,5 @@ spec:
     resources: {}
   dnsPolicy: ClusterFirst
   restartPolicy: Never
-  serviceAccountName: chapter7sa
+  serviceAccountName: chapter6sa
 status: {}

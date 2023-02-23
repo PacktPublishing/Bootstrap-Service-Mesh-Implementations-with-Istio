@@ -3,19 +3,19 @@ kind: Namespace
 metadata:
   labels:
     istio-injection: enabled
-  name: chapter7
+  name: chapter6
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: httpbin
-  namespace: chapter7
+  namespace: chapter6
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: httpbin
-  namespace: chapter7
+  namespace: chapter6
   labels:
     app: httpbin
     service: httpbin
@@ -34,7 +34,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: httpbin
-  namespace: chapter7
+  namespace: chapter6
 spec:
   replicas: 1
   selector:

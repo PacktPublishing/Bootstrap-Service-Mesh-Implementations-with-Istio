@@ -5,7 +5,7 @@ metadata:
   name: catalogue-db
   labels:
     name: catalogue-db
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   replicas: 1
   selector:
@@ -18,7 +18,12 @@ spec:
     spec:
       containers:
       - name: catalogue-db
-        image: github.com/packtpublishing/bootstrap-service-mesh-implementations-with-istio/toyshop/catalogue-db:0.0.1
+        image: weaveworksdemos/catalogue-db:0.3.0
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: fake_password
+          - name: MYSQL_DATABASE
+            value: socksdb
         ports:
         - name: mysql
           containerPort: 3306

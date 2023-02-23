@@ -2,7 +2,7 @@ apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
 metadata:
   name: "httpbin-strict-tls"
-  namespace: chapter7
+  namespace: chapter6
 spec:
   mtls:
     mode: STRICT

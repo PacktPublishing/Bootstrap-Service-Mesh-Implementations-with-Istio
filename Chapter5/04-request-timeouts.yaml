@@ -1,8 +1,8 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: chapter6-gateway
-  namespace: chapter6
+  name: chapter5-gateway
+  namespace: chapter5
 spec:
   selector:
     istio: ingressgateway
@@ -12,18 +12,18 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "toyshop.com"
+    - "sockshop.com"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: toyshop
-  namespace: chapter6
+  name: sockshop
+  namespace: chapter5
 spec:
   hosts:
-  - "toyshop.com"
+  - "sockshop.com"
   gateways:
-  - chapter6-gateway
+  - chapter5-gateway
   http:
   - match:
     - uri:
@@ -32,23 +32,23 @@ spec:
     - destination:
         port:
           number: 80
-        host: front-end.toy-shop.svc.cluster.local
+        host: front-end.sock-shop.svc.cluster.local
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: orders
-  namespace: chapter6
+  namespace: chapter5
 spec:
   hosts:
-  - "orders.toy-shop.svc.cluster.local"
+  - "orders.sock-shop.svc.cluster.local"
   gateways:
   - mesh
   http:
   - timeout: 1s
     route:
     - destination:
-        host: orders.toy-shop.svc.cluster.local
+        host: orders.sock-shop.svc.cluster.local
         port:
           number: 80
 ---
@@ -56,10 +56,10 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: payment
-  namespace: chapter6
+  namespace: chapter5
 spec:
   hosts:
-  - "payment.toy-shop.svc.cluster.local"
+  - "payment.sock-shop.svc.cluster.local"
   gateways:
   - mesh
   http:
@@ -74,6 +74,6 @@ spec:
         fixedDelay: 10s
     route:
       - destination:
-          host: payment.toy-shop.svc.cluster.local
+          host: payment.sock-shop.svc.cluster.local
           port:
             number: 80

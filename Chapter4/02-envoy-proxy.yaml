@@ -6,7 +6,7 @@ metadata:
   labels:
     name: envoydummy
     service: envoydummy
-  namespace: chapter5
+  namespace: chapter4
 spec:
   ports:
   - port: 80
@@ -18,7 +18,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: envoydummy-2
-  namespace: chapter5
+  namespace: chapter4
 spec:
   replicas: 1
   selector:

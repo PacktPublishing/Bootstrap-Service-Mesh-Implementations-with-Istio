@@ -2,12 +2,12 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: mockshop
-  namespace: chapter5
+  namespace: chapter4
 spec:
   hosts:
   - "mockshop.com"
   gateways:
-  - chapter5-gateway
+  - chapter4-gateway
   http:
   - match:
     - uri:
@@ -30,8 +30,8 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: chapter5-gateway
-  namespace: chapter5
+  name: chapter4-gateway
+  namespace: chapter4
 spec:
   selector:
     istio: ingressgateway 
@@ -48,7 +48,7 @@ kind: DestinationRule
 
 metadata:
   name: envoy-destination
-  namespace: chapter5
+  namespace: chapter4
 spec:
   host: envoydummy
   subsets:

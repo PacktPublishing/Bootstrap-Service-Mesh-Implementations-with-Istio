@@ -1,8 +1,8 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: chapter6-gateway
-  namespace: chapter6
+  name: chapter5-gateway
+  namespace: chapter5
 spec:
   selector:
     istio: ingressgateway
@@ -18,12 +18,12 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: mockshop
-  namespace: chapter6
+  namespace: chapter5
 spec:
   hosts:
   - "mockshop.com"
   gateways:
-  - chapter6-gateway
+  - chapter5-gateway
   http:
   - match:
     - uri:

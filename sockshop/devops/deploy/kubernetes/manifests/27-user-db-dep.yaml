@@ -5,7 +5,7 @@ metadata:
   name: user-db
   labels:
     name: user-db
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   replicas: 1
   selector:
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: user-db
-        image: github.com/packtpublishing/bootstrap-service-mesh-implementations-with-istio/toyshop/user-db:0.0.1
+        image: weaveworksdemos/user-db:0.3.0
 
         ports:
         - name: mongo

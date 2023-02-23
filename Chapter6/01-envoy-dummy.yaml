@@ -4,7 +4,7 @@ kind: Namespace
 metadata:
   labels:
     istio-injection: enabled
-  name: chapter7
+  name: chapter6
 ---
 apiVersion: v1
 kind: Service
@@ -13,7 +13,7 @@ metadata:
   labels:
     name: envoydummy
     service: envoydummy
-  namespace: chapter7
+  namespace: chapter6
 spec:
   ports:
     # the port that this service should serve on
@@ -27,7 +27,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: envoy-dummy-2
-  namespace: chapter7
+  namespace: chapter6
 data:
   envoy-config-2.yaml: |-
     static_resources:
@@ -64,7 +64,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: envoydummy-2
-  namespace: chapter7
+  namespace: chapter6
 spec:
   replicas: 1
   selector:
@@ -96,8 +96,8 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: istio
-  name: chapter7-envoy-istio-ingress
-  namespace: chapter7
+  name: chapter6-envoy-istio-ingress
+  namespace: chapter6
 spec:
   rules:
   - host: "mockshop.com"

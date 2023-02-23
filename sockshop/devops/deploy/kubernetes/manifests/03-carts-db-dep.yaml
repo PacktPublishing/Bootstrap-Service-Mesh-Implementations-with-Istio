@@ -5,7 +5,7 @@ metadata:
   name: carts-db
   labels:
     name: carts-db
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   replicas: 1
   selector:

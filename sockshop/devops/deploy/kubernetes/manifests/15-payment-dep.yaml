@@ -5,7 +5,7 @@ metadata:
   name: payment
   labels:
     name: payment
-  namespace: toy-shop
+  namespace: sock-shop
 spec:
   replicas: 1
   selector:
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: payment
-        image: github.com/packtpublishing/bootstrap-service-mesh-implementations-with-istio/toyshop/payment:0.0.1
+        image: weaveworksdemos/payment:0.4.3
         resources:
           limits:
             cpu: 200m
@@ -27,7 +27,7 @@ spec:
             cpu: 99m
             memory: 100Mi
         ports:
-        - containerPort: 8080
+        - containerPort: 80
         securityContext:
           runAsNonRoot: true
           runAsUser: 10001
@@ -40,14 +40,14 @@ spec:
         livenessProbe:
           httpGet:
             path: /health
-            port: 8080
-          initialDelaySeconds: 30
+            port: 80
+          initialDelaySeconds: 300
           periodSeconds: 3
         readinessProbe:
           httpGet:
             path: /health
-            port: 8080
-          initialDelaySeconds: 30
+            port: 80
+          initialDelaySeconds: 180
           periodSeconds: 3
       nodeSelector:
         beta.kubernetes.io/os: linux

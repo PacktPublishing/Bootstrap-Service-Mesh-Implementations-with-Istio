@@ -1,14 +1,14 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: toyshop
-  namespace: chapter5
+  name: sockshop
+  namespace: chapter4
 spec:
   hosts:
-  - "*.toyshop.com"
-  - "toyshop.com"  
+  - "*.sockshop.com"
+  - "sockshop.com"  
   gateways:
-  - chapter5-gateway
+  - chapter4-gateway
   http:
   - match:
     - uri:
@@ -17,18 +17,18 @@ spec:
     - destination:
         port:
           number: 80
-        host: front-end.toy-shop.svc.cluster.local
+        host: front-end.sock-shop.svc.cluster.local
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: mockshop
-  namespace: chapter5
+  namespace: chapter4
 spec:
   hosts:
   - "mockshop.com"
   gateways:
-  - chapter5-gateway
+  - chapter4-gateway
   http:
   - match:
     - uri:
@@ -42,21 +42,21 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: chapter5-gateway
-  namespace: chapter5
+  name: chapter4-gateway
+  namespace: chapter4
 spec:
   selector:
     istio: ingressgateway 
   servers:
   - port:
       number: 443
-      name: https-sni-toyshop
+      name: https-sni-sockshop
       protocol: HTTPS
     tls:
       mode: SIMPLE
-      credentialName: sni-toyshop-credential 
+      credentialName: sni-sockshop-credential 
     hosts:
-    - "*.toyshop.com"
+    - "*.sockshop.com"
   - port:
       number: 443
       name: https-mockshop
@@ -68,10 +68,10 @@ spec:
     - "mockshop.com"
   - port:
       number: 443
-      name: https-toyshop
+      name: https-sockshop
       protocol: HTTPS
     tls:
       mode: SIMPLE
-      credentialName: toyshop-credential 
+      credentialName: sockshop-credential 
     hosts:
-    - "toyshop.com"
+    - "sockshop.com"
