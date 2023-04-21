@@ -57,3 +57,8 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 ## Get to Know the Author
 **Anand Rai**
 has over 18 years’ experience of working in information technology for various organizations including technology providers and consumers. He has held a variety of executive and senior roles in those organizations but has always taken a hands-on approach to technology. This experience has given him perspectives on how development in information technology drives productivity and improvements in our daily lives. His areas of specialization are application integration, API management, microservices architectures, the cloud, DevOps, and Kubernetes. He loves solving problems, visualizing new solutions, and helping organizations to use technology as an enabler for achieving business outcomes.
+
+### Download a free PDF
+
+ <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
+<p align="center"> <a href="https://packt.link/free-ebook/9781803246819">https://packt.link/free-ebook/9781803246819 </a> </p>
